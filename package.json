@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Sergokok/express-mesto-gha--0.git"
+    "url": "git+https://github.com/Sergokok/express-mesto-gha-errors.git"
   },
   "keywords": [],
   "author": "Nknrw",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Sergokok/express-mesto-gha--0/issues"
+    "url": "https://github.com/Sergokok/express-mesto-gha-errors/issues"
   },
-  "homepage": "https://github.com/Sergokok/express-mesto-gha--0#readme",
+  "homepage": "https://github.com/Sergokok/express-mesto-gha-errors#readme",
   "devDependencies": {
     "eslint": "^8.24.0",
     "eslint-config-airbnb-base": "^15.0.0",
