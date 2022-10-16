@@ -29,12 +29,14 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Данное поле должно быть заполнено'],
+    // required: [true, 'Данное поле должно быть заполнено'],
+    required: true,
     select: false,
   },
   email: {
     type: String,
-    required: [true, 'Данное поле должно быть заполнено'],
+    // required: [true, 'Данное поле должно быть заполнено'],
+    required: true,
     unique: true,
     validate: {
       validator:
