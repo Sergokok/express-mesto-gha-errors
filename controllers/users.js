@@ -1,6 +1,5 @@
-/* eslint-disable import/no-unresolved */
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/users');
 
 const AuthorizationError = require('../errors/authorization-err');
@@ -28,10 +27,10 @@ module.exports.login = async (req, res, next) => {
       expiresIn: '7d',
     });
     res.cookie('jwt', token, {
-      maxAge: 3600000 * 24 * 7,
       httpOnly: true,
       sameSite: true,
-      token: 'none',
+      maxAge: 3600000 * 24 * 7,
+      // token: 'none',
     });
     return res.status(200).send(user);
   } catch (err) {
@@ -94,7 +93,7 @@ module.exports.createUser = (req, res, next) => {
           if (err.name === 'ValidationError') {
             return next(new BadRequestError('Некорректные данные'));
           }
-          if (err.name === 'MongoError' && err.code === 11000) {
+          if (err.code === 11000) {
             return next(new ConflictError('Пользователь с таким email уже существует'));
           }
           return next(new ServerError('Ошибка сервера'));
