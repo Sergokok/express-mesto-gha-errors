@@ -20,20 +20,38 @@ app.use(express.json());
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
     password: Joi.string().required(),
+    email: Joi.string().required().email(),
   }),
 }), login);
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
-    avatar: Joi.string().required().regex(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
+app.post(
+  '/signup',
+  celebrate({ // <--- celebrate middleware
+    body: Joi.object().keys({ // <--- Joi middleware
+      name: Joi.string().min(2).max(30),
+      about: Joi.string().min(2).max(30),
+      avatar: Joi.string().regex(
+        /^(https?:\/\/)?([\da-z.-]+).([a-z.]{2,6})([/\w.-]*)*\/?$/,
+      ),
+      password: Joi.string().required(),
+      email: Joi.string().required().email(),
+    }),
   }),
-}), createUser);
+  createUser,
+);
+// ТАК БЫЛО хотя похоже
+// app.post('/signup', celebrate({
+//   body: Joi.object().keys({
+//     name: Joi.string().required().min(2).max(30),
+//     about: Joi.string().required().min(2).max(30),
+//     avatar: Joi.string().required().regex(
+//       /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+//     ),
+//     password: Joi.string().required(),
+//     email: Joi.string().required().email(),
+//   }),
+// }), createUser);
 
 app.use(auth);
 
